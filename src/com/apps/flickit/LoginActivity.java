@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.View;
 
 import com.apps.flickit.R;
+import com.apps.flickit.networking.FlickrClient;
 import com.codepath.oauth.OAuthLoginActivity;
 
 public class LoginActivity extends OAuthLoginActivity<FlickrClient> {

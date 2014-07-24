@@ -15,7 +15,10 @@ import android.view.MenuItem;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.apps.flickit.adapters.PhotoArrayAdapter;
 import com.apps.flickit.models.FlickrPhoto;
+import com.apps.flickit.networking.FlickrClient;
+import com.apps.flickit.R;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 public class PhotosActivity extends Activity {

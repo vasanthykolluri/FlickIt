@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="10"
+        android:minSdkVersion="14"
         android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -60,9 +60,46 @@
             android:label="@string/title_activity_photos" >
         </activity>
         <activity
+
             android:name="com.apps.flickit.AddGroupActivity"
             android:label="@string/title_activity_add_group" >
         </activity>
+		<activity
+            android:name="com.apps.flickit.HandleGroupAddReqActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Holo.Light.Dialog"
+            android:uiOptions="splitActionBarWhenNarrow" >
+        </activity>
+       
+        <service android:name="com.parse.PushService" />
+
+        <receiver android:name="com.parse.ParseBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.parse.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <!-- IMPORTANT: Change "com.parse.tutorials.pushnotifications" to match your app's package name. -->
+                <category android:name="com.apps.flickit" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.apps.flickit.MyCustomReceiver"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="GROUP_ADD_REQ" />
+                <action android:name="GROUP_ADD_REQ_RESP" />
+            </intent-filter>
+        </receiver>
+        
     </application>
 
 </manifest>
