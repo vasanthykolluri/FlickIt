@@ -1,0 +1,80 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${packageName}.${activityClass}" >
+
+    <EditText
+        android:id="@+id/etGroupName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="21dp"
+        android:layout_marginTop="85dp"
+        android:ems="10"
+        android:hint="Enter Group Name" />
+
+    <TextView
+        android:id="@+id/tvGroupName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/etGroupName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/etGroupName"
+        android:layout_toLeftOf="@+id/etGroupName"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:text="Group Name" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvGroupName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/tvGroupName"
+        android:layout_marginLeft="32dp"
+        android:src="@drawable/ic_upload_image" />
+
+    <TextView
+        android:id="@+id/tvStartDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvGroupName"
+        android:layout_alignTop="@+id/dpStartDate"
+        android:layout_alignBottom="@+id/dpStartDate"
+        android:hint="Start Date"
+        android:text="Start Date"
+        android:gravity="center" />
+
+    <DatePicker
+        android:id="@+id/dpStartDate"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:scaleX="0.5"
+        android:scaleY="0.5" />
+
+    <TextView
+        android:id="@+id/tvEndDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/dpEndDate"
+        android:layout_alignBottom="@+id/dpEndDate"
+        android:layout_alignLeft="@+id/tvStartDate"
+        android:gravity="center"
+        android:text="End Date" />
+
+    <DatePicker
+        android:id="@+id/dpEndDate"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:scaleX="0.5"
+        android:scaleY="0.5" />
+
+</RelativeLayout>

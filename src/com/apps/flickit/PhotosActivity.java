@@ -7,14 +7,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.GridView;
 import android.widget.Toast;
 
 import com.apps.flickit.models.FlickrPhoto;
-import com.apps.flickit.R;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 public class PhotosActivity extends Activity {
@@ -40,7 +41,7 @@ public class PhotosActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.photos, menu);
+		getMenuInflater().inflate(R.menu.add_group, menu);
 		return true;
 	}
 	
@@ -80,5 +81,11 @@ public class PhotosActivity extends Activity {
             }
     	});
 	}
+	
+	public void onAddGroup(MenuItem mi) {
+		Intent intent = new Intent(this, AddGroupActivity.class);
+		startActivity(intent);
+	}
+	
 
 }
