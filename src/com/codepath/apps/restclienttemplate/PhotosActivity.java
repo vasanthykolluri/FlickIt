@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.models.FlickrPhoto;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -32,6 +33,7 @@ public class PhotosActivity extends Activity {
 		adapter = new PhotoArrayAdapter(this, photoItems);
 		gvPhotos.setAdapter(adapter);
 		loadPhotos();
+		findPeople();
 	}
 
 	@Override
@@ -64,6 +66,16 @@ public class PhotosActivity extends Activity {
 					adapter.add(p);
 				}
 				Log.d("DEBUG", "Total: " + photoItems.size());
+            }
+    	});
+	}
+	
+	public void findPeople() {
+		client.getPeopleByName(new JsonHttpResponseHandler() { 
+    		public void onSuccess(JSONObject json) {
+                Log.d("DEBUG", "result: " + json.toString());
+                Toast.makeText(getApplicationContext(), json.toString(), Toast.LENGTH_SHORT).show();
+                
             }
     	});
 	}
