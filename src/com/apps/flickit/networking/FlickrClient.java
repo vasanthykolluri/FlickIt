@@ -1,4 +1,4 @@
-package com.apps.flickit;
+package com.apps.flickit.networking;
 
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.FlickrApi;

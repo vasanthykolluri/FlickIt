@@ -1,7 +1,9 @@
-package com.apps.flickit;
+package com.apps.flickit.adapters;
 
 import java.util.List;
 
+import com.apps.flickit.R.id;
+import com.apps.flickit.R.layout;
 import com.apps.flickit.models.FlickrPhoto;
 import com.apps.flickit.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
