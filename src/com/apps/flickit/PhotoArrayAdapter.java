@@ -1,8 +1,9 @@
-package com.codepath.apps.restclienttemplate;
+package com.apps.flickit;
 
 import java.util.List;
 
-import com.codepath.apps.restclienttemplate.models.FlickrPhoto;
+import com.apps.flickit.models.FlickrPhoto;
+import com.apps.flickit.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.content.Context;

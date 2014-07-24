@@ -1,4 +1,4 @@
-package com.codepath.apps.restclienttemplate.models;
+package com.apps.flickit.models;
 
 import java.util.ArrayList;
 

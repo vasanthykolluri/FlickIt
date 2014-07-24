@@ -1,4 +1,4 @@
-package com.codepath.apps.restclienttemplate;
+package com.apps.flickit;
 
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.FlickrApi;

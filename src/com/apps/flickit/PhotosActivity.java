@@ -1,4 +1,4 @@
-package com.codepath.apps.restclienttemplate;
+package com.apps.flickit;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,8 @@ import android.view.Menu;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.codepath.apps.restclienttemplate.models.FlickrPhoto;
+import com.apps.flickit.models.FlickrPhoto;
+import com.apps.flickit.R;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 public class PhotosActivity extends Activity {

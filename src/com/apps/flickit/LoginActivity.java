@@ -1,10 +1,11 @@
-package com.codepath.apps.restclienttemplate;
+package com.apps.flickit;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 
+import com.apps.flickit.R;
 import com.codepath.oauth.OAuthLoginActivity;
 
 public class LoginActivity extends OAuthLoginActivity<FlickrClient> {
