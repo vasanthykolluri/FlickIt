@@ -83,6 +83,10 @@
             android:theme="@android:style/Theme.Holo.Light.Dialog"
             android:uiOptions="splitActionBarWhenNarrow" >
         </activity>
+        <activity
+            android:name="com.apps.flickit.FriendListActivity"
+            android:label="@string/title_activity_friend_list" >
+        </activity>
 
         <service android:name="com.parse.PushService" />
 

@@ -22,9 +22,9 @@
         android:layout_alignBottom="@+id/etGroupName"
         android:layout_alignParentLeft="true"
         android:layout_alignTop="@+id/etGroupName"
+        android:layout_marginLeft="5dp"
         android:layout_toLeftOf="@+id/etGroupName"
         android:gravity="center"
-        android:layout_marginLeft="5dp"
         android:text="Group Name" />
 
     <ImageView
@@ -38,43 +38,66 @@
         android:layout_marginLeft="32dp"
         android:src="@drawable/ic_upload_image" />
 
+    <ImageButton
+        android:id="@+id/imgStartDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/etStartDate"
+        android:layout_toRightOf="@+id/etStartDate"
+        android:contentDescription="@string/selectdate"
+        android:cropToPadding="true"
+        android:onClick="selectDate"
+        android:src="@drawable/ic_datepicker" />
+
+    <ImageButton
+        android:id="@+id/imgEndDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/etEndDate"
+        android:contentDescription="@string/selectdate"
+        android:cropToPadding="true"
+        android:onClick="selectDate"
+        android:src="@drawable/ic_datepicker" />
+
     <TextView
         android:id="@+id/tvStartDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tvGroupName"
-        android:layout_alignTop="@+id/dpStartDate"
-        android:layout_alignBottom="@+id/dpStartDate"
+        android:layout_below="@+id/tvGroupName"
+        android:layout_marginTop="43dp"
+        android:gravity="center"
         android:hint="Start Date"
-        android:text="Start Date"
-        android:gravity="center" />
+        android:text="Start Date" />
 
-    <DatePicker
-        android:id="@+id/dpStartDate"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:scaleX="0.5"
-        android:scaleY="0.5" />
+    <EditText
+        android:id="@+id/etStartDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvStartDate"
+        android:layout_toLeftOf="@+id/imgEndDate"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
 
     <TextView
         android:id="@+id/tvEndDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/dpEndDate"
-        android:layout_alignBottom="@+id/dpEndDate"
         android:layout_alignLeft="@+id/tvStartDate"
+        android:layout_below="@+id/tvStartDate"
+        android:layout_marginTop="71dp"
         android:gravity="center"
         android:text="End Date" />
 
-    <DatePicker
-        android:id="@+id/dpEndDate"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:scaleX="0.5"
-        android:scaleY="0.5" />
+    <EditText
+        android:id="@+id/etEndDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvEndDate"
+        android:layout_toRightOf="@+id/tvStartDate"
+        android:ems="10" />
 
 </RelativeLayout>

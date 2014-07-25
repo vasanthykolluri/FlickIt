@@ -29,7 +29,7 @@ public class FlickrClientApp extends com.activeandroid.app.Application {
 	private static User owner;
 	private static ParseClient parseClient;
 
-	public static final String userName = "Vasanthy";
+	public static final String userName = "Akash";
 
 	@Override
 	public void onCreate() {
