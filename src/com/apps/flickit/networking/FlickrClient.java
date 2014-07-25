@@ -31,6 +31,14 @@ public class FlickrClient extends OAuthBaseClient {
         client.get(apiUrl, params, handler);
     }
 
+    public void getMyUserProfile(JsonHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("?&format=json&nojsoncallback=1&method=flickr.urls.getUserProfile");
+        Log.d("DEBUG", "Sending API call to " + apiUrl);
+        RequestParams params = new RequestParams();
+		params.put("format", "json");
+        client.get(apiUrl, params, handler);
+	}
+    
 	public void getPeopleByName(JsonHttpResponseHandler handler) {
         String apiUrl = getApiUrl("?&format=json&nojsoncallback=1&method=flickr.people.findByEmail&find_email=akashagarwal1988@yahoo.com");
         Log.d("DEBUG", "Sending API call to " + apiUrl);

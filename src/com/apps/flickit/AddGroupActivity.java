@@ -2,6 +2,8 @@ package com.apps.flickit;
 
 import java.util.Date;
 
+import com.apps.flickit.networking.MyCustomSender;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -25,7 +27,9 @@ public class AddGroupActivity extends Activity {
 		Toast.makeText(getApplicationContext(), "onSaveGroup", Toast.LENGTH_SHORT).show();
 		// ToDo: add the appropriate values
 		Date dummy = new Date();
-		FlickrClientApp.getParseClient().addGroup("groupIdDummy", "nameDummy", "imgUrlDummy", dummy, dummy);
-		FlickrClientApp.getParseClient().addUserGroup("userIdDummy", "groupIdDummy");
+		FlickrClientApp.getParseClient().addGroup("2657656@N25", "Test-vas", "imgUrlDummy", dummy, dummy);
+		FlickrClientApp.getParseClient().addUserGroup(FlickrClientApp.getAppOwner().getUserId(), "2657656@N25");
+		
+		MyCustomSender.sendGroupAddReq(FlickrClientApp.getAppOwner().getUserId(), "vasanthy", "117036493@N07", "akash", "2657656@N25", "Test-vas");
 	}
 }

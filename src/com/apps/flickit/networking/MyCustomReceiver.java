@@ -33,7 +33,7 @@ public class MyCustomReceiver extends BroadcastReceiver {
 					String channel = intent.getExtras().getString(
 							"com.parse.Channel");
 					// Filter on user's channel
-					if (channel.equals(FlickrClientApp.userName)) {
+					if (channel.equals(MyUtils.getChannelName(FlickrClientApp.getAppOwner().getUserId()))) {
 						JSONObject json = new JSONObject(intent.getExtras()
 								.getString("com.parse.Data"));
 
@@ -68,7 +68,7 @@ public class MyCustomReceiver extends BroadcastReceiver {
 					Log.d(TAG, "got action " + action + " on channel "
 							+ channel);
 					// Filter on user's channel
-					if (channel.equals(FlickrClientApp.userName)) {
+					if (channel.equals(MyUtils.getChannelName(FlickrClientApp.getAppOwner().getUserId()))) {
 
 						GroupAddReqResp groupAddReqResp = GroupAddReqResp
 								.fromJson(json.getJSONObject("groupAddReqResp"));

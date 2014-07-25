@@ -3,9 +3,7 @@ package com.apps.flickit.networking;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Context;
-import android.widget.Toast;
-
+import com.apps.flickit.networking.*;
 import com.apps.flickit.models.GroupAddReq;
 import com.apps.flickit.models.GroupAddReqResp;
 import com.parse.ParseException;
@@ -15,6 +13,8 @@ import com.parse.ParseQuery;
 import com.parse.SendCallback;
 
 public class MyCustomSender {
+	private static final String TAG = "MyCustomSender";
+
 	public static void sendGroupAddReq(String senderId, String senderName,
 			String receiverId, String receiverName, String groupId,
 			String groupName) {
@@ -37,7 +37,7 @@ public class MyCustomSender {
 			query.whereEqualTo("deviceType", "android");
 			push.setQuery(query);
 			// Push the notification to a specific user's channel
-			push.setChannel(receiverId);
+			push.setChannel(MyUtils.getChannelName(receiverId));
 			push.setData(obj);
 			push.sendInBackground(new SendCallback() {
 
@@ -72,7 +72,7 @@ public class MyCustomSender {
 			query.whereEqualTo("deviceType", "android");
 			push.setQuery(query);
 			// Send response on sender's channel
-			push.setChannel(groupAddReq.getSenderId());
+			push.setChannel(MyUtils.getChannelName(groupAddReq.getSenderId()));
 			push.setData(obj);
 			push.sendInBackground(new SendCallback() {
 

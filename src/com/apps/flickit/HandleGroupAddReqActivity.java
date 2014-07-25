@@ -38,17 +38,11 @@ public class HandleGroupAddReqActivity extends Activity implements OnClickListen
 	public void onClick(View v) {
 		if (v.getId() == R.id.btnAccept) {
 			MyCustomSender.sendGroupAddReqResp(groupAddReq, true);
+			// Add user to group in Parse db
+			FlickrClientApp.getParseClient().addUserGroup(groupAddReq.getReceiverId(), groupAddReq.getReceiverName());
 		} else if (v.getId() == R.id.btnDecline) {
 			MyCustomSender.sendGroupAddReqResp(groupAddReq, false);
 		}
 		finish();
 	}
-
-	
-
-//	private void addSendertoDB() {
-//		TrackABuddyApp.parseClient.addBuddy(senderLocation.getName(),
-//				senderLocation.getImgUrl(), senderLocation.getCity());
-//
-//	}
 }
