@@ -23,6 +23,9 @@ public class MyTestService extends IntentService {
 	    // To send a message to the Activity, create a pass a Bundle
 	    Bundle bundle = new Bundle();
 	    bundle.putString("resultValue", "My Result Value. Passed in: " + val);
+//	    Intent intentForPhotos = new Intent(Intent.ACTION_PICK,
+//	            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//	          startActivityForResult(intentForPhotos, 0);
 	    // Here we call send passing a resultCode and the bundle of extras
 	    rec.send(Activity.RESULT_OK, bundle);
 	  }

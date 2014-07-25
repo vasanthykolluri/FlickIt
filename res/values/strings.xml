@@ -10,6 +10,7 @@
     <string name="title_activity_friend_list">FriendListActivity</string>
     <string name="select">Select</string>
     <string name="selectdate">Select Date</string>
-    
+    <string name="title_activity_groups">GroupsActivity</string>
+    <string name="title_activity_group_pics">GroupPicsActivity</string>
 
 </resources>
