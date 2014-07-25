@@ -78,7 +78,7 @@ public class FriendListActivity extends Activity implements OnItemClickListener 
 	}
 
 	public void onSaveList(MenuItem mi) {
-		Toast.makeText(this, "" + checkedEmails, Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, "" + checkedEmails, Toast.LENGTH_LONG).show();
 		for (String email : checkedEmails) {
 			client.getUserByEmail(new JsonHttpResponseHandler() {
 				@Override
@@ -169,7 +169,7 @@ public class FriendListActivity extends Activity implements OnItemClickListener 
 	      public void onReceiveResult(int resultCode, Bundle resultData) {
 	        if (resultCode == RESULT_OK) {
 	          String resultValue = resultData.getString("resultValue");
-	          Toast.makeText(getApplicationContext(), resultValue, Toast.LENGTH_SHORT).show();
+	          //Toast.makeText(getApplicationContext(), resultValue, Toast.LENGTH_SHORT).show();
 	        }
 	      }
 	    });

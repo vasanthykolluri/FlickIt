@@ -25,6 +25,7 @@ import com.apps.flickit.adapters.PhotoArrayAdapter;
 import com.apps.flickit.models.FlickrPhoto;
 import com.apps.flickit.models.Group;
 import com.apps.flickit.networking.FlickrClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 public class PhotosActivity extends Activity {
@@ -50,9 +51,6 @@ public class PhotosActivity extends Activity {
 		adapter = new PhotoArrayAdapter(this, photoItems);
 		gvPhotos.setAdapter(adapter);
 		loadPhotos();
-		// findPeople();
-		// //postPicture();
-		// postPicture();
 	}
 
 	@Override
@@ -110,79 +108,79 @@ public class PhotosActivity extends Activity {
 				Toast.LENGTH_SHORT).show();
 		
 		client.createPhotoPost(BitmapFactory.decodeResource(getResources(),
-				R.drawable.ic_launcher), new JsonHttpResponseHandler() {
+				R.drawable.ic_launcher), new AsyncHttpResponseHandler() {
 
 			@Override
 			public void onSuccess(int status, String response) {
 				Toast.makeText(getApplicationContext(),
-						"Uploaded Successfully response=" + response,
+						"Uploaded Successfully!",
 						Toast.LENGTH_SHORT).show();
 				Log.d("debug", "Uploaded Successfully response=" + response);
 				String photoId = response;
 
-				client.getNsidFromPhotoId(photoId,
-						new JsonHttpResponseHandler() {
-
-							@Override
-							public void onSuccess(JSONObject json) {
-								Log.d("DEBUG", "result POST: " + json);
-								try {
-									NSIDfromPhotoId = json
-											.getJSONObject("photo")
-											.getJSONObject("owner")
-											.getString("nsid");
-									String getId = json.getJSONObject("photo")
-											.getJSONObject("photo ")
-											.getString("id");
-									Date startDateGrp1 = dateParse("07/23/2014");
-									Date startDateGrp2 = dateParse("07/31/2014");
-									Date endDateGrp1 = dateParse("07/28/2014");
-									Date endDateGrp2 = dateParse("08/05/2014");
-									ArrayList<Group> groups = new ArrayList<Group>(
-											Arrays.asList(new Group(
-													"2667613@N20", "xyzasdf",
-													"testURL", startDateGrp1,
-													endDateGrp1), new Group(
-													"2727659@N22",
-													"AlaskaTrip", "test",
-													startDateGrp2, endDateGrp2)));
-									Date currentDate = new Date();
-									for (Group group : groups) {
-										if (group.getStartDate().before(
-												currentDate)
-												&& group.getEndDate().after(
-														currentDate)) {
-											client.addPhotosInGroups(
-													group.getGroupId(),
-													getId,
-													new JsonHttpResponseHandler() {
-
-														@Override
-														public void onSuccess(
-																JSONObject json) {
-															Log.d("DEBUG",
-																	"Posted Pic to Eligible Groups"
-																			+ json);
-															Toast.makeText(
-																	getApplicationContext(),
-																	"Added Pic to Eligible Groups",
-																	Toast.LENGTH_SHORT);
-														}
-
-													});
-										}
-									}
-
-								} catch (JSONException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								} catch (ParseException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-							}
-
-						});
+//				client.getNsidFromPhotoId(photoId,
+//						new JsonHttpResponseHandler() {
+//
+//							@Override
+//							public void onSuccess(JSONObject json) {
+//								Log.d("DEBUG", "result POST: " + json);
+//								try {
+//									NSIDfromPhotoId = json
+//											.getJSONObject("photo")
+//											.getJSONObject("owner")
+//											.getString("nsid");
+//									String getId = json.getJSONObject("photo")
+//											.getJSONObject("photo ")
+//											.getString("id");
+//									Date startDateGrp1 = dateParse("07/23/2014");
+//									Date startDateGrp2 = dateParse("07/31/2014");
+//									Date endDateGrp1 = dateParse("07/28/2014");
+//									Date endDateGrp2 = dateParse("08/05/2014");
+//									ArrayList<Group> groups = new ArrayList<Group>(
+//											Arrays.asList(new Group(
+//													"2667613@N20", "xyzasdf",
+//													"testURL", startDateGrp1,
+//													endDateGrp1), new Group(
+//													"2727659@N22",
+//													"AlaskaTrip", "test",
+//													startDateGrp2, endDateGrp2)));
+//									Date currentDate = new Date();
+//									for (Group group : groups) {
+//										if (group.getStartDate().before(
+//												currentDate)
+//												&& group.getEndDate().after(
+//														currentDate)) {
+//											client.addPhotosInGroups(
+//													group.getGroupId(),
+//													getId,
+//													new JsonHttpResponseHandler() {
+//
+//														@Override
+//														public void onSuccess(
+//																JSONObject json) {
+//															Log.d("DEBUG",
+//																	"Posted Pic to Eligible Groups"
+//																			+ json);
+//															Toast.makeText(
+//																	getApplicationContext(),
+//																	"Added Pic to Eligible Groups",
+//																	Toast.LENGTH_SHORT);
+//														}
+//
+//													});
+//										}
+//									}
+//
+//								} catch (JSONException e) {
+//									// TODO Auto-generated catch block
+//									e.printStackTrace();
+//								} catch (ParseException e) {
+//									// TODO Auto-generated catch block
+//									e.printStackTrace();
+//								}
+//							}
+//
+//						});
 			}
 
 			@Override

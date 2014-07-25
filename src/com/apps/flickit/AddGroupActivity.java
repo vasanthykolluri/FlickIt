@@ -120,7 +120,7 @@ public class AddGroupActivity extends FragmentActivity {
     	
     	public void onDateSet(DatePicker view, int yy, int mm, int dd) {
     		Bundle bundle = this.getArguments();
-    		Toast.makeText(getActivity(), "Arguments" + bundle.getString("viewName") , Toast.LENGTH_SHORT).show();
+    		//Toast.makeText(getActivity(), "Arguments" + bundle.getString("viewName") , Toast.LENGTH_SHORT).show();
     		populateSetDate(yy, mm+1, dd, bundle.getString("viewName"));
     	}
     }      
