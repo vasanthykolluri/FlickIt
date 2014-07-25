@@ -6,85 +6,53 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.apps.flickit.adapters.PhotoArrayAdapter;
-import com.apps.flickit.models.FlickrPhoto;
-import com.apps.flickit.networking.FlickrClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.GridView;
 import android.widget.Toast;
+
+import com.apps.flickit.models.Photo;
+import com.apps.flickit.networking.FlickrClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
 public class GroupPicsActivity extends Activity {
 
 	FlickrClient client;
-	ArrayList<FlickrPhoto> photoItems;
-	GridView gvPhotos;
-	PhotoArrayAdapter adapter;
-	private String groupId;
+	GridView gvGroupPics;
+	ArrayList<Photo> photos = new ArrayList<Photo>();
+	GroupPicsArrayAdapter groupPicsAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_group_pics);
-
 		client = FlickrClientApp.getRestClient();
-		groupId = getIntent().getStringExtra("groupId");
-		photoItems = new ArrayList<FlickrPhoto>();
-		gvPhotos = (GridView) findViewById(R.id.gvGroupPics);
-		adapter = new PhotoArrayAdapter(this, photoItems);
-		gvPhotos.setAdapter(adapter);
-		Toast.makeText(this, "groupId = " + groupId, Toast.LENGTH_SHORT).show();
+		String groupId = getIntent().getStringExtra("groupId");
 
-		getGroupPics();
+		setContentView(R.layout.activity_group_pics);
+		gvGroupPics = (GridView) findViewById(R.id.gvGroupPics);
+
+		groupPicsAdapter = new GroupPicsArrayAdapter(this, photos);
+		gvGroupPics.setAdapter(groupPicsAdapter);
+
+		getGroupPics(groupId);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		// getMenuInflater().inflate(R.menu.add_group, menu);
-		return true;
-	}
-
-	public void getGroupPics() {
-		Toast.makeText(this, "getGroupPics", Toast.LENGTH_SHORT).show();
+	public void getGroupPics(String groupId) {
 		client.getGroupPics(groupId, new JsonHttpResponseHandler() {
 			public void onSuccess(JSONObject json) {
-				
-				Log.d("DEBUG", "result: " + json.toString());
-				adapter.clear();
-				photoItems.clear();
-				FlickrPhoto.recentItems().clear();
 
-				// Add new photos to SQLite
+				Log.d("DEBUG", "result: " + json.toString());
 				try {
-					JSONArray photos = json.getJSONObject("photos")
+					JSONArray photoJsons = json.getJSONObject("photos")
 							.getJSONArray("photo");
-					for (int x = 0; x < photos.length(); x++) {
-						String uid = photos.getJSONObject(x).getString("id");
-						FlickrPhoto p = FlickrPhoto.byPhotoUid(uid);
-						if (p == null) {
-							p = new FlickrPhoto(photos.getJSONObject(x));
-						}
-						;
-						p.save();
-					}
+					groupPicsAdapter.clear();
+					groupPicsAdapter.addAll(Photo.fromJSONArray(photoJsons));
 				} catch (JSONException e) {
 					e.printStackTrace();
 					Log.e("debug", e.toString());
 				}
-
-				// Load into GridView from DB
-				for (FlickrPhoto p : FlickrPhoto.recentItems()) {
-					adapter.add(p);
-				}
-				Log.d("DEBUG", "Total: " + photoItems.size());
 			}
 		});
 	}
-
 }

@@ -5,7 +5,7 @@
         android:id="@+id/miShowGroups"
         android:icon="@drawable/ic_groups"
         android:onClick="onShowGroupsClick"
-        android:showAsAction="ifRoom"
+        android:showAsAction="always"
         android:title="ShowGroups">
     </item>
     
@@ -13,7 +13,7 @@
         android:id="@+id/miAddGroup"
         android:icon="@drawable/ic_add_group_new"
         android:onClick="onAddGroup"
-        android:showAsAction="ifRoom"
+        android:showAsAction="always"
         android:title="AddGroup">
     </item>
    
@@ -22,7 +22,7 @@
         android:id="@+id/miCamera"
         android:icon="@drawable/ic_camera"
         android:onClick="onCameraClick"
-        android:showAsAction="ifRoom"
+        android:showAsAction="always"
         android:title="ClickAndShare">
     </item>
 </menu>
