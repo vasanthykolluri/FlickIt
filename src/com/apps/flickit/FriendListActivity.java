@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +25,8 @@ import android.widget.Toast;
 
 import com.apps.flickit.networking.FlickrClient;
 import com.apps.flickit.networking.MyCustomSender;
+import com.apps.flickit.service.MyTestReceiver;
+import com.apps.flickit.service.MyTestService;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 public class FriendListActivity extends Activity implements OnItemClickListener {
@@ -39,6 +42,9 @@ public class FriendListActivity extends Activity implements OnItemClickListener 
 	String myName;
 	String groupId;
 	String groupName;
+	public MyTestReceiver receiverForTest;
+	String startDate;
+	String endDate;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +63,17 @@ public class FriendListActivity extends Activity implements OnItemClickListener 
 		String userName = intent.getStringExtra("user");
 		groupId = intent.getStringExtra("groupId");
 		groupName = intent.getStringExtra("groupName");
+		 startDate = intent.getStringExtra("startDate");
+		 endDate = intent.getStringExtra("endDate");
 		getMyName();
+		setupServiceReceiver();
+	//	Toast.makeText(getApplicationContext(), userName + " " + groupId + " "+ groupName + " " + startDate + " " + endDate, Toast.LENGTH_SHORT).show();
+		
+
 		// Toast.makeText(getApplicationContext(), userName + " " + groupId +
 		// " "+ groupName + " " + startDate + " " + endDate,
 		// Toast.LENGTH_SHORT).show();
+
 
 	}
 
@@ -133,9 +146,38 @@ public class FriendListActivity extends Activity implements OnItemClickListener 
 
 		}
 		
+		onStartService();
+	}
+	
+	public void onStartService() {
+        // Construct our Intent specifying the Service
+        Intent i = new Intent(this, MyTestService.class);
+        // Add extras to the bundle
+        i.putExtra("foo", "bar");
+        i.putExtra("startDate", startDate);	
+        i.putExtra("endDate", endDate);
+        i.putExtra("receiver", receiverForTest);
+        // Start the service
+        startService(i);
+    }
+	
+	public void setupServiceReceiver() {
+	    receiverForTest = new MyTestReceiver(new Handler());
+	    // This is where we specify what happens when data is received from the service
+	    receiverForTest.setReceiver(new MyTestReceiver.Receiver() {
+	      @Override
+	      public void onReceiveResult(int resultCode, Bundle resultData) {
+	        if (resultCode == RESULT_OK) {
+	          String resultValue = resultData.getString("resultValue");
+	          Toast.makeText(getApplicationContext(), resultValue, Toast.LENGTH_SHORT).show();
+	        }
+	      }
+	    });
+	  }
+	
 		
 
-	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
