@@ -16,7 +16,7 @@ import com.parse.PushService;
 public class FlickrClientApp extends com.activeandroid.app.Application {
 	private static Context context;
 
-	public static final String userName = "Vasanthy";
+	public static final String userName = "Akash";
 
 	@Override
 	public void onCreate() {

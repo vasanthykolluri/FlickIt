@@ -38,7 +38,8 @@ public class PhotosActivity extends Activity {
 		adapter = new PhotoArrayAdapter(this, photoItems);
 		gvPhotos.setAdapter(adapter);
 		loadPhotos();
-		findPeople();
+		//findPeople();
+		postPicture();
 	}
 
 	@Override
@@ -83,6 +84,23 @@ public class PhotosActivity extends Activity {
                 
             }
     	});
+	}
+	public void postPicture() {
+		client.postPic(new JsonHttpResponseHandler() { 
+			@Override
+    		public void onSuccess(JSONObject json) {
+                Log.d("DEBUG", "result: " + json.toString());
+                Toast.makeText(getApplicationContext(), json.toString(), Toast.LENGTH_SHORT).show();
+                
+            }
+    		@Override
+			public void onFailure(Throwable e, String s) {
+				Log.d("debug", e.toString());
+				Log.d("debug", s.toString());
+			//	Toast.makeText(getActivity(), "Post Failed !", Toast.LENGTH_SHORT).show();
+			}
+			
+    	}, "status");
 	}
 	
 	public void onAddGroup(MenuItem mi) {

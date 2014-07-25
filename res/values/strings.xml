@@ -7,5 +7,9 @@
     <string name="title_activity_photos">Flickr Photos</string>
     <string name="login_label">Log in</string>
     <string name="title_activity_add_group">AddGroupActivity</string>
+    <string name="title_activity_friend_list">FriendListActivity</string>
+    <string name="select">Select</string>
+    <string name="selectdate">Select Date</string>
+    
 
 </resources>
