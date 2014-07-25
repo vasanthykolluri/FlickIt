@@ -80,8 +80,8 @@ public class AddGroupActivity extends FragmentActivity {
 		intent.putExtra("user", "Akash");
 		intent.putExtra("groupId", groupId);
 		intent.putExtra("groupName", groupName);
-		intent.putExtra("startDate", startDate);
-		intent.putExtra("endDate", endDate);
+		intent.putExtra("startDate", etStartDate.getText().toString());
+		intent.putExtra("endDate", etEndDate.getText().toString());
 		
 		// ToDo: update imgUrl
 		Date dummy = new Date();

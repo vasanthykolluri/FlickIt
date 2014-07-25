@@ -2,6 +2,10 @@ package com.apps.flickit.networking;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.zip.Deflater;
 
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.FlickrApi;
@@ -104,4 +108,25 @@ public class FlickrClient extends OAuthBaseClient {
 
 		client.post(apiUrl, params, handler);
 	}
+
+	public void getNsidFromPhotoId(String photoId,
+			JsonHttpResponseHandler handler) {
+		String apiUrl = getApiUrl("?&format=json&nojsoncallback=1&method=flickr.photos.getInfo&photo_id=" + photoId);
+		Log.d("DEBUG", "Sending API call to " + apiUrl);
+		RequestParams params = new RequestParams();
+		params.put("format", "json");
+		client.get(apiUrl, params, handler);
+		
+	}
+
+	public void addPhotosInGroups(String groupId, String photoId,
+			JsonHttpResponseHandler handler) {
+		String apiUrl = getApiUrl("?&format=json&nojsoncallback=1&method=flickr.groups.pools.add&photo_id=" + photoId + "&group_id=" + groupId);
+		Log.d("DEBUG", "Sending API call to " + apiUrl);
+		RequestParams params = new RequestParams();
+		params.put("format", "json");
+		client.post(apiUrl, params, handler);
+		
+	}
+
 }
