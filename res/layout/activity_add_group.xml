@@ -49,15 +49,6 @@
         android:text="Start Date"
         android:gravity="center" />
 
-    <DatePicker
-        android:id="@+id/dpStartDate"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:scaleX="0.5"
-        android:scaleY="0.5" />
-
     <TextView
         android:id="@+id/tvEndDate"
         android:layout_width="wrap_content"
@@ -75,6 +66,35 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:scaleX="0.5"
-        android:scaleY="0.5" />
+        android:scaleY="0.5" 
+      />
+
+    <DatePicker
+        android:id="@+id/dpStartDate"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/etGroupName"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+      />
+
+    <Button
+        android:id="@+id/btnStartDate"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/dpStartDate"
+        android:layout_alignLeft="@+id/btnEndDate"
+        android:text="Change" />
+
+    <Button
+        android:id="@+id/btnEndDate"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Change" />
 
 </RelativeLayout>
