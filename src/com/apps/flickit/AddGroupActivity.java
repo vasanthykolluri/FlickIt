@@ -1,5 +1,9 @@
 package com.apps.flickit;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import com.apps.flickit.networking.MyCustomSender;
@@ -25,7 +29,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -65,12 +68,13 @@ public class AddGroupActivity extends FragmentActivity {
 		getMenuInflater().inflate(R.menu.save_group, menu);
 		return true;
 	}
-	public void onSaveGroup(MenuItem mi){
+	public void onSaveGroup(MenuItem mi) throws ParseException{
 
 		String groupId = "2657656@N25";
 		String groupName = etGroupName.getText().toString();
-		String startDate = etStartDate.getText().toString();
-		String endDate = etEndDate.getText().toString();
+		DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		Date startDate = sdf.parse(etStartDate.getText().toString());
+		Date endDate = sdf.parse(etEndDate.getText().toString());
 		
 		Intent intent = new Intent(this, FriendListActivity.class);
 		intent.putExtra("user", "Akash");
@@ -81,12 +85,9 @@ public class AddGroupActivity extends FragmentActivity {
 		
 		// ToDo: update imgUrl
 		Date dummy = new Date();
-		FlickrClientApp.getParseClient().addGroup(groupId, groupName, "imgUrlDummy", dummy, dummy);
+		FlickrClientApp.getParseClient().addGroup(groupId, groupName, "imgUrlDummy", startDate, endDate);
 		FlickrClientApp.getParseClient().addUserGroup(FlickrClientApp.getAppOwner().getUserId(), groupId);
 		
-		MyCustomSender.sendGroupAddReq(FlickrClientApp.getAppOwner().getUserId(), "vasanthy", "125629891@N03", "vasanthy", "2657656@N25", "Test-vas");
-		//MyCustomSender.sendGroupAddReq(FlickrClientApp.getAppOwner().getUserId(), "vasanthy", "117036493@N07", "akash", "2657656@N25", "Test-vas");
-
 		startActivity(intent);
 	}
 	

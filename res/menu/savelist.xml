@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item
+     <item
         android:id="@+id/miSaveGroup"
-        android:icon="@drawable/ic_button_next"
+        android:icon="@drawable/ic_save_button_new"
         android:showAsAction="ifRoom"
-        android:title="SaveGroup"
-        android:onClick="onSaveGroup">
+        android:title="saveList"
+        android:onClick="onSaveList">
         
     </item>
 
