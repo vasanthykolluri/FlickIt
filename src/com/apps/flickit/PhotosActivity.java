@@ -37,7 +37,7 @@ public class PhotosActivity extends Activity {
 		gvPhotos = (GridView) findViewById(R.id.gvPhotos);
 		adapter = new PhotoArrayAdapter(this, photoItems);
 		gvPhotos.setAdapter(adapter);
-		loadPhotos();
+		//loadPhotos();
 		//findPeople();
 		postPicture();
 	}
@@ -86,7 +86,7 @@ public class PhotosActivity extends Activity {
     	});
 	}
 	public void postPicture() {
-		client.createPhotoPost("Any String".getBytes(),new JsonHttpResponseHandler() { 
+		client.createPhotoPost(null,new JsonHttpResponseHandler() { 
 			@Override
     		public void onSuccess(JSONObject json) {
                 Log.d("DEBUG", "result POST: " + json.toString());
