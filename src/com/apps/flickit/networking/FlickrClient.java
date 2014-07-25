@@ -5,6 +5,7 @@ import org.scribe.builder.api.FlickrApi;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.codepath.oauth.OAuthBaseClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -24,6 +25,7 @@ public class FlickrClient extends OAuthBaseClient {
     }
 
     public void getInterestingnessList(AsyncHttpResponseHandler handler) {
+    
         String apiUrl = getApiUrl("?&format=json&nojsoncallback=1&method=flickr.interestingness.getList");
         Log.d("DEBUG", "Sending API call to " + apiUrl);
         RequestParams params = new RequestParams();
@@ -38,5 +40,12 @@ public class FlickrClient extends OAuthBaseClient {
 		params.put("format", "json");
         client.get(apiUrl, params, handler);
 		
+	}
+	public void postPic(AsyncHttpResponseHandler handler, String photo){
+		String postUrl = "https://up.flickr.com/services/upload/?photo=" + photo;
+		Log.d("DEBUG", "Sending API call to " + postUrl);
+		RequestParams params = new RequestParams();
+			params.put("format","json");		
+		client.post(postUrl, params, handler);
 	}
 }

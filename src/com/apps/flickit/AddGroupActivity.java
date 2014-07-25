@@ -28,8 +28,6 @@ public class AddGroupActivity extends FragmentActivity {
 	EditText etStartDate;
 	EditText etEndDate;
 	
-	private int startYear, startMonth, startDay;
-	private int endYear, endMonth, endDay;
 	
 	String groupId = "stubGrpId";
 		
