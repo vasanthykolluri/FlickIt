@@ -1,13 +1,13 @@
 package com.apps.flickit;
 
 import java.util.Calendar;
-
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +17,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class AddGroupActivity extends Activity {
+public class AddGroupActivity extends FragmentActivity {
 	
 	EditText etGroupName;
 	DatePicker dpStartDate;
@@ -25,6 +25,8 @@ public class AddGroupActivity extends Activity {
 	Button btnSave;
 	Button btnStartDate;
 	Button btnEndDate;
+	EditText etStartDate;
+	EditText etEndDate;
 	
 	private int startYear, startMonth, startDay;
 	private int endYear, endMonth, endDay;
@@ -38,8 +40,8 @@ public class AddGroupActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_group);
-		setCurrentDateOnView();
-		addListenerOnButton();
+		//setCurrentDateOnView();
+		//addListenerOnButton();
 		etGroupName = (EditText) findViewById(R.id.etGroupName);
 
 	}
@@ -55,124 +57,42 @@ public class AddGroupActivity extends Activity {
 		intent.putExtra("user", "Akash");
 		intent.putExtra("groupId", groupId);
 		intent.putExtra("groupName", etGroupName.getText().toString());
-		intent.putExtra("startDate", new StringBuilder().append(startMonth + 1)
-				   .append("-").append(startDay).append("-").append(startYear)
-				   .append(" ").toString());
-		intent.putExtra("endDate", new StringBuilder().append(endMonth + 1)
-				   .append("-").append(endDay).append("-").append(endYear)
-				   .append(" ").toString());
+		intent.putExtra("startDate", etStartDate.getText().toString());
+		intent.putExtra("endDate", etEndDate.getText().toString());
 		startActivity(intent);
-		//Toast.makeText(getApplicationContext(), "populateFriendList", Toast.LENGTH_SHORT).show();
 	}
 	
-	public void addListenerOnButton() {
-		 
-		btnStartDate = (Button) findViewById(R.id.btnStartDate);
- 
-		btnStartDate.setOnClickListener(new OnClickListener() {
- 
-			@Override
-			public void onClick(View v) {
- 
-				showDialog(START_DATE_DIALOG_ID);
- 
-			}
- 
-		});
-		
-		btnEndDate = (Button) findViewById(R.id.btnEndDate);
-		 
-		btnEndDate.setOnClickListener(new OnClickListener() {
- 
-			@Override
-			public void onClick(View v) {
- 
-				showDialog(END_DATE_DIALOG_ID);
- 
-			}
- 
-		});
- 
-	}
-	
-	public void setCurrentDateOnView() {
-		 
-		dpStartDate = (DatePicker) findViewById(R.id.dpStartDate);
-		dpEndDate = (DatePicker) findViewById(R.id.dpEndDate);
- 
-		final Calendar c = Calendar.getInstance();
-		startYear = c.get(Calendar.YEAR);
-		startMonth = c.get(Calendar.MONTH);
-		startDay = c.get(Calendar.DAY_OF_MONTH);
- 
-		// set current date into datepicker
-		dpStartDate.init(startYear, startMonth, startDay, null);
-		
-		
-		endYear = startYear;
-		endMonth = startMonth;
-		endDay = startDay;
-		
-		// set current date into datepicker
-		dpEndDate.init(endYear, endMonth, endDay, null);
- 
-	}
-	
-
-	@Override
-	protected Dialog onCreateDialog(int id) {
-		switch (id) {
-		case START_DATE_DIALOG_ID:
-		   // set date picker as current date
-		   return new DatePickerDialog(this, startDateListener, 
-                         startYear, startMonth,startDay);
-		case END_DATE_DIALOG_ID:
-			return new DatePickerDialog(this, endDateListener, 
-                    endYear, endMonth, endDay);
-		
-		}
-		return null;
-	}
-	
-	private DatePickerDialog.OnDateSetListener startDateListener = new DatePickerDialog.OnDateSetListener() {
-		 
-		// when dialog box is closed, below method will be called.
-		public void onDateSet(DatePicker view, int selectedYear,
-				int selectedMonth, int selectedDay) {
-			startYear = selectedYear;
-			startMonth = selectedMonth;
-			startDay = selectedDay;
- 
-			// set selected date into textview
-			Toast.makeText(getApplicationContext(), new StringBuilder().append(startMonth + 1)
-			   .append("-").append(startDay).append("-").append(startYear)
-			   .append(" ").toString(), Toast.LENGTH_SHORT).show();
- 
-			// set selected date into datepicker also
-			dpStartDate.init(startYear, startMonth, startDay, null);
- 
-		}
-	};
-	
-	private DatePickerDialog.OnDateSetListener endDateListener = new DatePickerDialog.OnDateSetListener() {
-		 
-		// when dialog box is closed, below method will be called.
-		public void onDateSet(DatePicker view, int selectedYear,
-				int selectedMonth, int selectedDay) {
-			endYear = selectedYear;
-			endMonth = selectedMonth;
-			endDay = selectedDay;
- 
-			// set selected date into textview
-			Toast.makeText(getApplicationContext(), new StringBuilder().append(endMonth + 1)
-			   .append("-").append(endDay).append("-").append(endYear)
-			   .append(" ").toString(), Toast.LENGTH_SHORT).show();
- 
-			// set selected date into datepicker also
-			dpEndDate.init(endYear, endMonth, endDay, null);
- 
-		}
-	};
-	 
-               
+	public void selectDate(View view) {
+        DialogFragment newFragment = new SelectDateFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("viewName", new Integer(view.getId()).toString());
+        newFragment.setArguments(bundle);
+        newFragment.show(getSupportFragmentManager(), "DatePicker");
+    }
+    public void populateSetDate(int year, int month, int day, String viewId) {
+    	
+    	etStartDate = (EditText)findViewById(R.id.etStartDate);
+    	etEndDate = (EditText)findViewById(R.id.etEndDate);
+    	if(Integer.parseInt(viewId) == R.id.imgStartDate)
+    	etStartDate.setText(month+"/"+day+"/"+year);
+    	else if(Integer.parseInt(viewId) == R.id.imgEndDate)
+    	etEndDate.setText(month+"/"+day+"/"+year);
+    }
+    @SuppressLint("ValidFragment")
+	public class SelectDateFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+    	@Override
+    	public Dialog onCreateDialog(Bundle savedInstanceState) {
+			final Calendar calendar = Calendar.getInstance();
+			int yy = calendar.get(Calendar.YEAR);
+			int mm = calendar.get(Calendar.MONTH);
+			int dd = calendar.get(Calendar.DAY_OF_MONTH);
+			return new DatePickerDialog(getActivity(), this, yy, mm, dd);
+    	}
+    	
+    	public void onDateSet(DatePicker view, int yy, int mm, int dd) {
+    		Bundle bundle = this.getArguments();
+    		Toast.makeText(getActivity(), "Arguments" + bundle.getString("viewName") , Toast.LENGTH_SHORT).show();
+    		populateSetDate(yy, mm+1, dd, bundle.getString("viewName"));
+    	}
+    }      
 }
