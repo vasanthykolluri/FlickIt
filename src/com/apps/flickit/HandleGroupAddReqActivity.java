@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.apps.flickit.models.GroupAddReq;
 import com.apps.flickit.networking.MyCustomSender;
@@ -17,17 +18,21 @@ public class HandleGroupAddReqActivity extends Activity implements OnClickListen
 	boolean click = true;
 
 	private GroupAddReq groupAddReq;
+	private TextView tvGroupAddReq;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		setContentView(R.layout.popup_groupaddreq);
+		tvGroupAddReq = (TextView) findViewById(R.id.tvGroupAddReq);
+
 		groupAddReq = (GroupAddReq) getIntent().getSerializableExtra(
 				"groupAddReq");
-		String message = groupAddReq.getSenderName() + " wants to add you to " + groupAddReq.getGroupName();
+		String message = groupAddReq.getSenderName() + " wants to add you to group " + groupAddReq.getGroupName();
 		
-		setTitle(message);
-		setContentView(R.layout.popup_groupaddreq);
+		setTitle("FlickIt!");
+		tvGroupAddReq.setText(message);
+		
 		accept = (Button) findViewById(R.id.btnAccept);
 		accept.setOnClickListener(this);
 		decline = (Button) findViewById(R.id.btnDecline);
@@ -39,7 +44,7 @@ public class HandleGroupAddReqActivity extends Activity implements OnClickListen
 		if (v.getId() == R.id.btnAccept) {
 			MyCustomSender.sendGroupAddReqResp(groupAddReq, true);
 			// Add user to group in Parse db
-			FlickrClientApp.getParseClient().addUserGroup(groupAddReq.getReceiverId(), groupAddReq.getReceiverName());
+			FlickrClientApp.getParseClient().addUserGroup(groupAddReq.getReceiverId(), groupAddReq.getGroupId());
 		} else if (v.getId() == R.id.btnDecline) {
 			MyCustomSender.sendGroupAddReqResp(groupAddReq, false);
 		}

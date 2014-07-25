@@ -103,7 +103,8 @@ public class FlickrClientApp extends com.activeandroid.app.Application {
 					// Subscribe to receiving on specific channels
 					PushService.subscribe(context,
 							MyUtils.getChannelName(userId),
-							HandleGroupAddReqActivity.class);
+							PhotosActivity.class);
+					 
 				} catch (JSONException e) {
 					e.printStackTrace();
 					Log.e("debug", e.toString());
