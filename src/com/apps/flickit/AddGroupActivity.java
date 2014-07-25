@@ -30,6 +30,8 @@ public class AddGroupActivity extends Activity {
 		FlickrClientApp.getParseClient().addGroup("2657656@N25", "Test-vas", "imgUrlDummy", dummy, dummy);
 		FlickrClientApp.getParseClient().addUserGroup(FlickrClientApp.getAppOwner().getUserId(), "2657656@N25");
 		
-		MyCustomSender.sendGroupAddReq(FlickrClientApp.getAppOwner().getUserId(), "vasanthy", "117036493@N07", "akash", "2657656@N25", "Test-vas");
+		MyCustomSender.sendGroupAddReq(FlickrClientApp.getAppOwner().getUserId(), "vasanthy", "125629891@N03", "vasanthy", "2657656@N25", "Test-vas");
+
+		//MyCustomSender.sendGroupAddReq(FlickrClientApp.getAppOwner().getUserId(), "vasanthy", "117036493@N07", "akash", "2657656@N25", "Test-vas");
 	}
 }

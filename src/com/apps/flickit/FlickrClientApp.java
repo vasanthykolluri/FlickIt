@@ -13,6 +13,7 @@ import com.apps.flickit.models.Group;
 import com.apps.flickit.models.User;
 import com.apps.flickit.models.UserGroup;
 import com.apps.flickit.networking.FlickrClient;
+import com.apps.flickit.networking.MyUtils;
 import com.apps.flickit.networking.ParseClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -73,8 +74,6 @@ public class FlickrClientApp extends com.activeandroid.app.Application {
 		PushService.setDefaultPushCallback(this, PhotosActivity.class);
 
 		// PushService.subscribe(context, TrackABuddyApp.userName,
-		// HandleTrackReqActivity.class);
-		// PushService.subscribe(context, TrackABuddyApp.userName,
 		// ShowPopUpResponse.class)
 
 		// ParseAnalytics.trackAppOpened(getIntent());
@@ -100,8 +99,11 @@ public class FlickrClientApp extends com.activeandroid.app.Application {
 							.getString("nsid");
 					owner.setUserId(userId);
 					ParseInstallation.getCurrentInstallation().put("username",
-							owner.getUserId());
-			
+							userId);
+					// Subscribe to receiving on specific channels
+					PushService.subscribe(context,
+							MyUtils.getChannelName(userId),
+							HandleGroupAddReqActivity.class);
 				} catch (JSONException e) {
 					e.printStackTrace();
 					Log.e("debug", e.toString());

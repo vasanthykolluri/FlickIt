@@ -67,6 +67,8 @@ public class GroupAddReqResp implements Serializable {
 		try {
 			groupAddReqResp.senderId = jsonObject.getString("senderId");
 			groupAddReqResp.senderName = jsonObject.getString("senderName");
+			groupAddReqResp.receiverId = jsonObject.getString("receiverId");
+			groupAddReqResp.receiverName = jsonObject.getString("receiverName");
 			groupAddReqResp.groupId = jsonObject.getString("groupId");
 			groupAddReqResp.groupName = jsonObject.getString("groupName");
 			groupAddReqResp.response = jsonObject.getBoolean("response");
@@ -84,6 +86,8 @@ public class GroupAddReqResp implements Serializable {
 		try {
 			jsonObject.put("senderId", groupAddReqResp.senderId);
 			jsonObject.put("senderName", groupAddReqResp.senderName);
+			jsonObject.put("receiverId", groupAddReqResp.receiverId);
+			jsonObject.put("receiverName", groupAddReqResp.receiverName);
 			jsonObject.put("groupId", groupAddReqResp.groupId);
 			jsonObject.put("groupName", groupAddReqResp.groupName);
 			jsonObject.put("response", groupAddReqResp.response);

@@ -3,6 +3,8 @@ package com.apps.flickit.networking;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import com.apps.flickit.networking.*;
 import com.apps.flickit.models.GroupAddReq;
 import com.apps.flickit.models.GroupAddReqResp;
@@ -28,8 +30,7 @@ public class MyCustomSender {
 			GroupAddReq groupAddReq = new GroupAddReq(senderId, senderName,
 					receiverId, receiverName, groupId, groupName);
 			obj.put("groupAddReq", GroupAddReq.toJson(groupAddReq));
-			// obj.put("message", "Let's track each other. What say???");
-
+			
 			ParsePush push = new ParsePush();
 			ParseQuery query = ParseInstallation.getQuery();
 
@@ -55,24 +56,31 @@ public class MyCustomSender {
 
 	public static void sendGroupAddReqResp(GroupAddReq groupAddReq, boolean response) {
 
+		Log.d(TAG, groupAddReq.getSenderId() + " " + groupAddReq.getSenderName());
+		Log.d(TAG, groupAddReq.getReceiverId() + " " + groupAddReq.getReceiverName());
+
+		
 		JSONObject obj;
 		try {
 			obj = new JSONObject();
-			obj.put("alert", "Group Add Response!");
 			obj.put("action", MyCustomReceiver.intentActionGroupAddReqResp);
 			GroupAddReqResp groupAddReqResp = new GroupAddReqResp(
 					groupAddReq.getReceiverId(), groupAddReq.getReceiverName(),
 					groupAddReq.getSenderId(), groupAddReq.getSenderName(),
 					groupAddReq.getGroupId(), groupAddReq.getGroupName(),
 					response);
+			obj.put("alert", "FlickIt! Response from " + groupAddReqResp.getSenderName());
 			obj.put("groupAddReqResp", GroupAddReqResp.toJson(groupAddReqResp));
 
+			Log.d(TAG, "Resp Sender" + groupAddReqResp.getSenderId() + " " + groupAddReqResp.getSenderName());
+			Log.d(TAG, "Resp rcvr" + groupAddReqResp.getReceiverId() + " " + groupAddReqResp.getReceiverName());
+			
 			ParsePush push = new ParsePush();
 			ParseQuery query = ParseInstallation.getQuery();
 			query.whereEqualTo("deviceType", "android");
 			push.setQuery(query);
 			// Send response on sender's channel
-			push.setChannel(MyUtils.getChannelName(groupAddReq.getSenderId()));
+			push.setChannel(MyUtils.getChannelName(groupAddReqResp.getReceiverId()));
 			push.setData(obj);
 			push.sendInBackground(new SendCallback() {
 

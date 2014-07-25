@@ -24,7 +24,7 @@ public class HandleGroupAddReqActivity extends Activity implements OnClickListen
 		
 		groupAddReq = (GroupAddReq) getIntent().getSerializableExtra(
 				"groupAddReq");
-		String message = getIntent().getStringExtra("message");
+		String message = groupAddReq.getSenderName() + " wants to add you to " + groupAddReq.getGroupName();
 		
 		setTitle(message);
 		setContentView(R.layout.popup_groupaddreq);
