@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.apps.flickit.adapters.PhotoArrayAdapter;
 import com.apps.flickit.models.FlickrPhoto;
 import com.apps.flickit.networking.FlickrClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 public class PhotosActivity extends Activity {
@@ -39,7 +40,7 @@ public class PhotosActivity extends Activity {
 		gvPhotos.setAdapter(adapter);
 		loadPhotos();
 		//findPeople();
-		postPicture();
+		//postPicture();
 	}
 
 	@Override
@@ -85,14 +86,19 @@ public class PhotosActivity extends Activity {
             }
     	});
 	}
+	
+	
 	public void postPicture() {
-		client.createPhotoPost("Any String".getBytes(),new JsonHttpResponseHandler() { 
+		Toast.makeText(getApplicationContext(), "Posting pic", Toast.LENGTH_SHORT).show();
+		client.createPhotoPost( BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher),
+				new AsyncHttpResponseHandler() { 
 			@Override
-    		public void onSuccess(JSONObject json) {
-                Log.d("DEBUG", "result POST: " + json.toString());
-                Toast.makeText(getApplicationContext(), json.toString(), Toast.LENGTH_SHORT).show();
-                
-            }
+			public void onSuccess(int status, String response) {
+				Log.d("DEBUG", "result POST: " + response);
+                Toast.makeText(getApplicationContext(), "Post SUCCESS", Toast.LENGTH_SHORT).show();
+           
+			}
+			
     		@Override
 			public void onFailure(Throwable e, String s) {
 				Log.d("debug", e.toString());
@@ -108,5 +114,14 @@ public class PhotosActivity extends Activity {
 		startActivity(intent);
 	}
 	
+	
+	public void onShowGroupsClick(MenuItem mi) {
+		Intent intent = new Intent(this, GroupActivity.class);
+		startActivity(intent);
+	}
+	
+	public void onCameraClick(MenuItem mi) {
+		postPicture();
+	}
 
 }

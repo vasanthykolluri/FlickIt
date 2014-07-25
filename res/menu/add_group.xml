@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" > 
-<item
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+     <item
+        android:id="@+id/miShowGroups"
+        android:icon="@drawable/ic_groups"
+        android:onClick="onShowGroupsClick"
+        android:showAsAction="ifRoom"
+        android:title="ShowGroups">
+    </item>
+    
+    <item
         android:id="@+id/miAddGroup"
         android:icon="@drawable/ic_add_group_new"
+        android:onClick="onAddGroup"
         android:showAsAction="ifRoom"
-        android:title="AddGroup"
-        android:onClick="onAddGroup">
-        
+        android:title="AddGroup">
+    </item>
+   
+
+    <item
+        android:id="@+id/miCamera"
+        android:icon="@drawable/ic_camera"
+        android:onClick="onCameraClick"
+        android:showAsAction="ifRoom"
+        android:title="ClickAndShare">
     </item>
 </menu>
