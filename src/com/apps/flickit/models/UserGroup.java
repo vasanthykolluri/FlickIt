@@ -5,15 +5,14 @@ import java.util.Date;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
-@ParseClassName("UserGroups")
-public class UserGroups extends ParseObject {
+@ParseClassName("UserGroup")
+public class UserGroup extends ParseObject {
 	// subclass should have a public default constructor
-	public UserGroups() {
+	public UserGroup() {
 		super();
 	}
 
-	public UserGroups(String userId, String groupId, String imgUrl,
-			Date startDate, Date endDate) {
+	public UserGroup(String userId, String groupId) {
 		put("userId", userId);
 		put("groupId", groupId);
 	}

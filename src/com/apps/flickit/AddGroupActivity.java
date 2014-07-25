@@ -1,5 +1,10 @@
 package com.apps.flickit;
 
+import java.util.Date;
+
+import com.apps.flickit.networking.MyCustomSender;
+
+import android.app.Activity;
 import java.util.Calendar;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -41,8 +46,10 @@ public class AddGroupActivity extends FragmentActivity {
 		//setCurrentDateOnView();
 		//addListenerOnButton();
 		etGroupName = (EditText) findViewById(R.id.etGroupName);
-
+		etStartDate = (EditText)findViewById(R.id.etStartDate);
+    	etEndDate = (EditText)findViewById(R.id.etEndDate);
 	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -50,13 +57,27 @@ public class AddGroupActivity extends FragmentActivity {
 		return true;
 	}
 	public void onSaveGroup(MenuItem mi){
+
+		String groupId = "2657656@N25";
+		String groupName = etGroupName.getText().toString();
+		String startDate = etStartDate.getText().toString();
+		String endDate = etEndDate.getText().toString();
 		
 		Intent intent = new Intent(this, FriendListActivity.class);
 		intent.putExtra("user", "Akash");
 		intent.putExtra("groupId", groupId);
-		intent.putExtra("groupName", etGroupName.getText().toString());
-		intent.putExtra("startDate", etStartDate.getText().toString());
-		intent.putExtra("endDate", etEndDate.getText().toString());
+		intent.putExtra("groupName", groupName);
+		intent.putExtra("startDate", startDate);
+		intent.putExtra("endDate", endDate);
+		
+		// ToDo: update imgUrl
+		Date dummy = new Date();
+		FlickrClientApp.getParseClient().addGroup(groupId, groupName, "imgUrlDummy", dummy, dummy);
+		FlickrClientApp.getParseClient().addUserGroup(FlickrClientApp.getAppOwner().getUserId(), groupId);
+		
+		MyCustomSender.sendGroupAddReq(FlickrClientApp.getAppOwner().getUserId(), "vasanthy", "125629891@N03", "vasanthy", "2657656@N25", "Test-vas");
+		//MyCustomSender.sendGroupAddReq(FlickrClientApp.getAppOwner().getUserId(), "vasanthy", "117036493@N07", "akash", "2657656@N25", "Test-vas");
+
 		startActivity(intent);
 	}
 	

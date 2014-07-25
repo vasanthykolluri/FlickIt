@@ -1,10 +1,21 @@
 package com.apps.flickit;
 
-import android.content.Context;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.apps.flickit.models.FlickrPhoto;
 import com.apps.flickit.models.Group;
-import com.apps.flickit.models.UserGroups;
+import com.apps.flickit.models.User;
+import com.apps.flickit.models.UserGroup;
 import com.apps.flickit.networking.FlickrClient;
+import com.apps.flickit.networking.MyUtils;
+import com.apps.flickit.networking.ParseClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -15,6 +26,8 @@ import com.parse.PushService;
 
 public class FlickrClientApp extends com.activeandroid.app.Application {
 	private static Context context;
+	private static User owner;
+	private static ParseClient parseClient;
 
 	public static final String userName = "Akash";
 
@@ -23,6 +36,9 @@ public class FlickrClientApp extends com.activeandroid.app.Application {
 		super.onCreate();
 		FlickrClientApp.context = this;
 
+		// Get the owner info
+		setAppOwner();
+		parseClient = new ParseClient();
 
 		// Create global configuration and initialize ImageLoader with this
 		// configuration
@@ -32,7 +48,7 @@ public class FlickrClientApp extends com.activeandroid.app.Application {
 				getApplicationContext()).defaultDisplayImageOptions(
 				defaultOptions).build();
 		ImageLoader.getInstance().init(config);
-		
+
 		// Register app with Parse
 		registerParse();
 	}
@@ -46,7 +62,7 @@ public class FlickrClientApp extends com.activeandroid.app.Application {
 
 		// Register your parse models
 		ParseObject.registerSubclass(Group.class);
-		ParseObject.registerSubclass(UserGroups.class);
+		ParseObject.registerSubclass(UserGroup.class);
 		// ParseObject.registerSubclass(Settings.class);
 
 		// Add your initialization code here
@@ -58,13 +74,46 @@ public class FlickrClientApp extends com.activeandroid.app.Application {
 		PushService.setDefaultPushCallback(this, PhotosActivity.class);
 
 		// PushService.subscribe(context, TrackABuddyApp.userName,
-		// HandleTrackReqActivity.class);
-		// PushService.subscribe(context, TrackABuddyApp.userName,
 		// ShowPopUpResponse.class)
 
 		// ParseAnalytics.trackAppOpened(getIntent());
 		parseInstallation.getInstallationId();
-		parseInstallation.put("username", userName);
 		parseInstallation.saveInBackground();
+	}
+
+	public static ParseClient getParseClient() {
+		return parseClient;
+	}
+
+	public static User getAppOwner() {
+		return owner;
+	}
+
+	private void setAppOwner() {
+		owner = new User("0");
+		getRestClient().getMyUserProfile(new JsonHttpResponseHandler() {
+			@Override
+			public void onSuccess(JSONObject json) {
+				try {
+					String userId = json.getJSONObject("user")
+							.getString("nsid");
+					owner.setUserId(userId);
+					ParseInstallation.getCurrentInstallation().put("username",
+							userId);
+					// Subscribe to receiving on specific channels
+					PushService.subscribe(context,
+							MyUtils.getChannelName(userId),
+							HandleGroupAddReqActivity.class);
+				} catch (JSONException e) {
+					e.printStackTrace();
+					Log.e("debug", e.toString());
+				}
+			}
+
+			@Override
+			public void onFailure(Throwable e) {
+				e.printStackTrace();
+			}
+		});
 	}
 }
