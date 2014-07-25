@@ -4,13 +4,13 @@
     <string name="app_name">FlickIt!</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_photos">Flickr Photos</string>
+    <string name="title_activity_photos">FlickIt</string>
     <string name="login_label">Log in</string>
-    <string name="title_activity_add_group">AddGroupActivity</string>
-    <string name="title_activity_friend_list">FriendListActivity</string>
+    <string name="title_activity_add_group">Create a group</string>
+    <string name="title_activity_friend_list">Contacts</string>
     <string name="select">Select</string>
     <string name="selectdate">Select Date</string>
-    <string name="title_activity_groups">GroupsActivity</string>
-    <string name="title_activity_group_pics">GroupPicsActivity</string>
+    <string name="title_activity_groups">FlickIt Groups</string>
+    <string name="title_activity_group_pics">FlickIt Group Pics</string>
 
 </resources>

@@ -76,11 +76,11 @@
         </activity>
          <activity
             android:name=".GroupActivity"
-            android:label="Groups" >
+            android:label="@string/title_activity_groups" >
         </activity>
         <activity
             android:name=".GroupPicsActivity"
-            android:label="GroupPics" >
+            android:label="@string/title_activity_group_pics" >
         </activity>
         <activity
             android:name=".HandleGroupAddReqActivity"

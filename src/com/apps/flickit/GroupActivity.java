@@ -36,16 +36,17 @@ public class GroupActivity extends Activity {
 		aGroups = new GroupArrayAdapter(this, groups);
 		lvGroups.setAdapter(aGroups);
 
-//		lvGroups.setOnItemClickListener(new OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position,
-//                    long id) {
-//				Intent i = new Intent(view.getContext(), GroupPicsActivity.class);
-//				Group group = (Group) parent.getAdapter().getItem(position);
-//				i.putExtra("groupId", group.getGroupId());
-//				startActivity(i);
-//			}
-//		});
+		lvGroups.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Intent i = new Intent(view.getContext(),
+						GroupPicsActivity.class);
+				Group group = (Group) parent.getAdapter().getItem(position);
+				i.putExtra("groupId", group.getGroupId());
+				startActivity(i);
+			}
+		});
 		populateGroups();
 	}
 
@@ -54,19 +55,19 @@ public class GroupActivity extends Activity {
 		ParseQuery<Group> query = ParseQuery.getQuery(Group.class);
 		// Specify the object id
 		query.findInBackground(new FindCallback<Group>() {
-			
+
 			public void done(List<Group> groupItems, ParseException e) {
-					aGroups.clear();
-					aGroups.addAll(groupItems);			
+				aGroups.clear();
+				aGroups.addAll(groupItems);
 			}
-		});	
+		});
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.compose_menu, menu);
+		// getMenuInflater().inflate(R.menu.compose_menu, menu);
 		return true;
 	}
 
@@ -82,5 +83,4 @@ public class GroupActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	
 }
