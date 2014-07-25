@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -18,7 +19,6 @@ import android.widget.Toast;
 import com.apps.flickit.adapters.PhotoArrayAdapter;
 import com.apps.flickit.models.FlickrPhoto;
 import com.apps.flickit.networking.FlickrClient;
-import com.apps.flickit.R;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 public class PhotosActivity extends Activity {
@@ -86,10 +86,10 @@ public class PhotosActivity extends Activity {
     	});
 	}
 	public void postPicture() {
-		client.postPic(new JsonHttpResponseHandler() { 
+		client.createPhotoPost("Any String".getBytes(),new JsonHttpResponseHandler() { 
 			@Override
     		public void onSuccess(JSONObject json) {
-                Log.d("DEBUG", "result: " + json.toString());
+                Log.d("DEBUG", "result POST: " + json.toString());
                 Toast.makeText(getApplicationContext(), json.toString(), Toast.LENGTH_SHORT).show();
                 
             }
@@ -97,10 +97,10 @@ public class PhotosActivity extends Activity {
 			public void onFailure(Throwable e, String s) {
 				Log.d("debug", e.toString());
 				Log.d("debug", s.toString());
-			//	Toast.makeText(getActivity(), "Post Failed !", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "Post Failed !", Toast.LENGTH_SHORT).show();
 			}
 			
-    	}, "status");
+    	});
 	}
 	
 	public void onAddGroup(MenuItem mi) {
