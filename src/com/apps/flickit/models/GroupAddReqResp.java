@@ -6,11 +6,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class GroupAddReqResp implements Serializable {
-	
+
 	private static final long serialVersionUID = -4832201350462873804L;
-	
-	private String userId;
-	private String userName;
+
+	private String senderId;
+	private String senderName;
+	private String receiverId;
+	private String receiverName;
 	private String groupId;
 	private String groupName;
 	private Boolean response;
@@ -18,24 +20,34 @@ public class GroupAddReqResp implements Serializable {
 	public GroupAddReqResp() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public GroupAddReqResp(String userId, String userName, String groupId,
+
+	public GroupAddReqResp(String senderId, String senderName,
+			String receiverId, String receiverName, String groupId,
 			String groupName, Boolean response) {
-		this.userId = userId;
-		this.userName = userName;
+		this.senderId = senderId;
+		this.senderName = senderName;
+		this.receiverId = receiverId;
+		this.receiverName = receiverName;
 		this.groupId = groupId;
 		this.groupName = groupName;
 		this.response = response;
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getSenderId() {
+		return senderId;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getSenderName() {
+		return senderName;
 	}
 
+	public String getReceiverId() {
+		return receiverId;
+	}
+
+	public String getReceiverName() {
+		return receiverName;
+	}
 
 	public String getGroupId() {
 		return groupId;
@@ -53,8 +65,8 @@ public class GroupAddReqResp implements Serializable {
 		GroupAddReqResp groupAddReqResp = new GroupAddReqResp();
 
 		try {
-			groupAddReqResp.userId = jsonObject.getString("userId");
-			groupAddReqResp.userName = jsonObject.getString("userName");
+			groupAddReqResp.senderId = jsonObject.getString("senderId");
+			groupAddReqResp.senderName = jsonObject.getString("senderName");
 			groupAddReqResp.groupId = jsonObject.getString("groupId");
 			groupAddReqResp.groupName = jsonObject.getString("groupName");
 			groupAddReqResp.response = jsonObject.getBoolean("response");
@@ -70,8 +82,8 @@ public class GroupAddReqResp implements Serializable {
 		JSONObject jsonObject = new JSONObject();
 
 		try {
-			jsonObject.put("userId", groupAddReqResp.userId);
-			jsonObject.put("userName", groupAddReqResp.userName);
+			jsonObject.put("senderId", groupAddReqResp.senderId);
+			jsonObject.put("senderName", groupAddReqResp.senderName);
 			jsonObject.put("groupId", groupAddReqResp.groupId);
 			jsonObject.put("groupName", groupAddReqResp.groupName);
 			jsonObject.put("response", groupAddReqResp.response);

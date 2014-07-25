@@ -1,5 +1,7 @@
 package com.apps.flickit;
 
+import java.util.Date;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,6 +22,10 @@ public class AddGroupActivity extends Activity {
 		return true;
 	}
 	public void onSaveGroup(MenuItem mi){
-		Toast.makeText(getApplicationContext(), "populateFriendList", Toast.LENGTH_SHORT).show();
+		Toast.makeText(getApplicationContext(), "onSaveGroup", Toast.LENGTH_SHORT).show();
+		// ToDo: add the appropriate values
+		Date dummy = new Date();
+		FlickrClientApp.getParseClient().addGroup("groupIdDummy", "nameDummy", "imgUrlDummy", dummy, dummy);
+		FlickrClientApp.getParseClient().addUserGroup("userIdDummy", "groupIdDummy");
 	}
 }

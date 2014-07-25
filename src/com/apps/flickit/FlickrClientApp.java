@@ -3,8 +3,9 @@ package com.apps.flickit;
 import android.content.Context;
 
 import com.apps.flickit.models.Group;
-import com.apps.flickit.models.UserGroups;
+import com.apps.flickit.models.UserGroup;
 import com.apps.flickit.networking.FlickrClient;
+import com.apps.flickit.networking.ParseClient;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -15,6 +16,7 @@ import com.parse.PushService;
 
 public class FlickrClientApp extends com.activeandroid.app.Application {
 	private static Context context;
+	private static ParseClient parseClient;
 
 	public static final String userName = "Vasanthy";
 
@@ -22,7 +24,7 @@ public class FlickrClientApp extends com.activeandroid.app.Application {
 	public void onCreate() {
 		super.onCreate();
 		FlickrClientApp.context = this;
-
+		parseClient = new ParseClient();
 
 		// Create global configuration and initialize ImageLoader with this
 		// configuration
@@ -46,7 +48,7 @@ public class FlickrClientApp extends com.activeandroid.app.Application {
 
 		// Register your parse models
 		ParseObject.registerSubclass(Group.class);
-		ParseObject.registerSubclass(UserGroups.class);
+		ParseObject.registerSubclass(UserGroup.class);
 		// ParseObject.registerSubclass(Settings.class);
 
 		// Add your initialization code here
@@ -66,5 +68,9 @@ public class FlickrClientApp extends com.activeandroid.app.Application {
 		parseInstallation.getInstallationId();
 		parseInstallation.put("username", userName);
 		parseInstallation.saveInBackground();
+	}
+	
+	public static ParseClient getParseClient() {
+		return parseClient;
 	}
 }

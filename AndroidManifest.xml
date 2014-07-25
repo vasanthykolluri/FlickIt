@@ -92,7 +92,7 @@
         </receiver>
 
         <receiver
-            android:name="com.apps.flickit.MyCustomReceiver"
+            android:name="com.apps.flickit.networking.MyCustomReceiver"
             android:exported="false" >
             <intent-filter>
                 <action android:name="GROUP_ADD_REQ" />

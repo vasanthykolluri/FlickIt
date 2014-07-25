@@ -1,8 +1,10 @@
-package com.apps.flickit;
+package com.apps.flickit.networking;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.apps.flickit.FlickrClientApp;
+import com.apps.flickit.HandleGroupAddReqActivity;
 import com.apps.flickit.models.GroupAddReq;
 import com.apps.flickit.models.GroupAddReqResp;
 
@@ -39,7 +41,6 @@ public class MyCustomReceiver extends BroadcastReceiver {
 								+ channel);
 						GroupAddReq groupAddReq = GroupAddReq
 								.fromJson(json.getJSONObject("groupAddReq"));
-						String message = json.getString("message");
 
 						// Handle push notification by invoking activity
 						// directly
@@ -47,7 +48,6 @@ public class MyCustomReceiver extends BroadcastReceiver {
 								HandleGroupAddReqActivity.class);
 						pupInt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 						pupInt.putExtra("groupAddReq", groupAddReq);
-						pupInt.putExtra("message", message);
 						context.getApplicationContext().startActivity(pupInt);
 
 						// Handle push notification by sending a local
