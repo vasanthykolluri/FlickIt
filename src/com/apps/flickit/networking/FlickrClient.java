@@ -9,6 +9,7 @@ import org.scribe.builder.api.FlickrApi;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.codepath.oauth.OAuthBaseClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -39,12 +40,13 @@ public class FlickrClient extends OAuthBaseClient {
 
 	public void getGroupPics(String groupId, AsyncHttpResponseHandler handler) {
 
-		String apiUrl = getApiUrl("?&format=json&nojsoncallback=1&method=flickr.groups.pools.getPhotos");
+		String myGroupId=groupId.replace("@", "%40");
+		String apiUrl = getApiUrl("?&format=json&nojsoncallback=1&method=flickr.groups.pools.getPhotos&group_Id="+groupId);
 		Log.d("DEBUG", "Sending API call to " + apiUrl);
 		RequestParams params = new RequestParams();
 		params.put("format", "json");
-		//groupId.replace("@", "%40");
-		params.put("groupId", groupId);
+		groupId.replace("@", "%40");
+		params.put("group_id", groupId);
 		client.get(apiUrl, params, handler);
 	}
 

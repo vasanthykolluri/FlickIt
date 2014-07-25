@@ -35,7 +35,7 @@ public class GroupPicsActivity extends Activity {
 		client = FlickrClientApp.getRestClient();
 		groupId = getIntent().getStringExtra("groupId");
 		photoItems = new ArrayList<FlickrPhoto>();
-		gvPhotos = (GridView) findViewById(R.id.gvPhotos);
+		gvPhotos = (GridView) findViewById(R.id.gvGroupPics);
 		adapter = new PhotoArrayAdapter(this, photoItems);
 		gvPhotos.setAdapter(adapter);
 		Toast.makeText(this, "groupId = " + groupId, Toast.LENGTH_SHORT).show();
@@ -54,7 +54,12 @@ public class GroupPicsActivity extends Activity {
 		Toast.makeText(this, "getGroupPics", Toast.LENGTH_SHORT).show();
 		client.getGroupPics(groupId, new JsonHttpResponseHandler() {
 			public void onSuccess(JSONObject json) {
+				
 				Log.d("DEBUG", "result: " + json.toString());
+				adapter.clear();
+				photoItems.clear();
+				FlickrPhoto.recentItems().clear();
+
 				// Add new photos to SQLite
 				try {
 					JSONArray photos = json.getJSONObject("photos")
