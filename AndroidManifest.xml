@@ -80,7 +80,7 @@
         </activity>
         <activity
             android:name=".GroupPicsActivity"
-            android:label="Group Pics" >
+            android:label="GroupPics" >
         </activity>
         <activity
             android:name=".HandleGroupAddReqActivity"

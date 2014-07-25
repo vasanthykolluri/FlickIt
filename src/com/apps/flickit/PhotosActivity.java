@@ -52,8 +52,8 @@ public Date dateParse(String date) throws ParseException{
 		gvPhotos.setAdapter(adapter);
 		//loadPhotos();
 		//findPeople();
-		//postPicture();
-		postPicture();
+//		//postPicture();
+//		postPicture();
 	}
 
 	@Override
@@ -103,14 +103,14 @@ public Date dateParse(String date) throws ParseException{
 	
 	public void postPicture() {
 		
-		Toast.makeText(getApplicationContext(), "Posting pic", Toast.LENGTH_SHORT).show();
+		Toast.makeText(getApplicationContext(), "Upload in progress...", Toast.LENGTH_SHORT).show();
 		client.createPhotoPost( BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher),
 				new JsonHttpResponseHandler() { 
 
 			@Override
 			public void onSuccess(JSONObject json) {
 				Log.d("DEBUG", "result POST: " + json);
-                Toast.makeText(getApplicationContext(), "Post SUCCESS", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Uploaded Successfully", Toast.LENGTH_SHORT).show();
                 String photoId = "";
                 try {
 				 photoId = json.getString("photoid");
@@ -138,8 +138,8 @@ public Date dateParse(String date) throws ParseException{
 
 											@Override
 											public void onSuccess(JSONObject json) {
-												Log.d("DEBUG", "result POST: " + json);
-												Toast.makeText(getApplicationContext(), ""+ json, Toast.LENGTH_SHORT);
+												Log.d("DEBUG", "Posted Pic to Eligible Groups" + json);
+												Toast.makeText(getApplicationContext(), "Added Pic to Eligible Groups", Toast.LENGTH_SHORT);
 											}
 											
 										});

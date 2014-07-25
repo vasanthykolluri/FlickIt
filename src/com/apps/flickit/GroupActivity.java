@@ -36,16 +36,16 @@ public class GroupActivity extends Activity {
 		aGroups = new GroupArrayAdapter(this, groups);
 		lvGroups.setAdapter(aGroups);
 
-		lvGroups.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                    long id) {
-				Intent i = new Intent(view.getContext(), GroupPicsActivity.class);
-				Group group = (Group) parent.getAdapter().getItem(position);
-				i.putExtra("groupId", group.getGroupId());
-				startActivity(i);
-			}
-		});
+//		lvGroups.setOnItemClickListener(new OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position,
+//                    long id) {
+//				Intent i = new Intent(view.getContext(), GroupPicsActivity.class);
+//				Group group = (Group) parent.getAdapter().getItem(position);
+//				i.putExtra("groupId", group.getGroupId());
+//				startActivity(i);
+//			}
+//		});
 		populateGroups();
 	}
 
