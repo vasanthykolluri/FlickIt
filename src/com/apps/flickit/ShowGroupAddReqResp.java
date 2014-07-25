@@ -27,11 +27,9 @@ public class ShowGroupAddReqResp extends Activity implements OnClickListener {
 		tvTrackReqResponse = (TextView) findViewById(R.id.tvTrackReqResp);
 		btnOK = (Button) findViewById(R.id.btnOK);
 		if (response == true) {
-			tvTrackReqResponse.setText("Yayy!!! Invite for " + groupName
-					+ " accepted by " + friendName);
+			tvTrackReqResponse.setText("Yayy!!!" + friendName + " joined group " + groupName);
 		} else {
-			tvTrackReqResponse.setText("Oops!!! Invite for " + groupName
-					+ " declined by " + friendName);
+			tvTrackReqResponse.setText("Oops!!!" + friendName + " did not join group " + groupName);
 		}
 	}
 
