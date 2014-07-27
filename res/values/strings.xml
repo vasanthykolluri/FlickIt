@@ -10,6 +10,9 @@
     <string name="title_activity_friend_list">Contacts</string>
     <string name="select">Select</string>
     <string name="selectdate">Select Date</string>
+    <string name="icon_groups">Groups</string>
+    <string name="icon_add_group">Add Group</string>
+    <string name="icon_click_share">Click And Share</string>
     <string name="title_activity_groups">FlickIt Groups</string>
     <string name="title_activity_group_pics">FlickIt Group Pics</string>
 

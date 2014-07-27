@@ -6,7 +6,8 @@
         android:icon="@drawable/ic_groups"
         android:onClick="onShowGroupsClick"
         android:showAsAction="always"
-        android:title="ShowGroups">
+        android:title="@string/icon_groups"
+        >
     </item>
     
     <item
@@ -14,7 +15,7 @@
         android:icon="@drawable/ic_add_group_new"
         android:onClick="onAddGroup"
         android:showAsAction="always"
-        android:title="AddGroup">
+        android:title="@string/icon_add_group">
     </item>
    
 
@@ -23,6 +24,6 @@
         android:icon="@drawable/ic_camera"
         android:onClick="onCameraClick"
         android:showAsAction="always"
-        android:title="ClickAndShare">
+        android:title="@string/icon_click_share">
     </item>
 </menu>
