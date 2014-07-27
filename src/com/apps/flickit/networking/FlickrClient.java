@@ -120,11 +120,15 @@ public class FlickrClient extends OAuthBaseClient {
 	}
 
 	public void addPhotosInGroups(String groupId, String photoId,
-			JsonHttpResponseHandler handler) {
-		String apiUrl = getApiUrl("?&format=json&nojsoncallback=1&method=flickr.groups.pools.add&photo_id=" + photoId + "&group_id=" + groupId);
+			AsyncHttpResponseHandler handler) {
+		//String apiUrl = getApiUrl("?&format=json&nojsoncallback=1&method=flickr.groups.pools.add&photo_id=" + photoId + "&group_id=" + groupId);
+		String apiUrl = "https://api.flickr.com/services/rest/?method=flickr.groups.pools.add";
+
 		Log.d("DEBUG", "Sending API call to " + apiUrl);
 		RequestParams params = new RequestParams();
-		params.put("format", "json");
+		//params.put("format", "json");
+		params.put("photo_id", photoId);
+		params.put("group_id", groupId);
 		client.post(apiUrl, params, handler);
 		
 	}

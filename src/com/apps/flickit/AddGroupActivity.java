@@ -70,7 +70,7 @@ public class AddGroupActivity extends FragmentActivity {
 	}
 	public void onSaveGroup(MenuItem mi) throws ParseException{
 
-		String groupId = "2657656@N25";
+		String groupId = "2727659@N22";
 		String groupName = etGroupName.getText().toString();
 		DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 		Date startDate = sdf.parse(etStartDate.getText().toString());
